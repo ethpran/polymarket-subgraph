@@ -32,3 +32,23 @@ services:
       postgres_db: postgres
       ipfs: 'ipfs:5001'
       ethereum: 'matic:${MATIC_RPC_URL}'
+
+  pgAdmin:
+      image: dpage/pgadmin4:8.11.0
+      restart: always
+      user: root
+      ports:
+        - 8080:80
+      environment:
+        PGADMIN_DEFAULT_EMAIL: hi@example.com
+        PGADMIN_DEFAULT_PASSWORD: password
+        PGADMIN_CONFIG_SERVER_MODE: 'False'
+        PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+      volumes:
+        - pgadmin:/var/lib/pgadmin
+      depends_on:
+        - postgres
+
+volumes:
+  pgdata:
+  pgadmin:
